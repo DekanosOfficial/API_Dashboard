@@ -1,0 +1,80 @@
+High-Level Flow
+
+          ┌──────────────┐
+          │   Frontend   │
+          │ (Dashboard)  │
+          └──────┬───────┘
+                 │
+                 │ HTTP Requests (fetch metrics)
+                 ▼
+        ┌──────────────────┐
+        │    FastAPI App   │
+        │  (Backend API)   │
+        └────────┬─────────┘
+                 │
+        ┌────────▼─────────┐
+        │    Middleware    │
+        │ (Request Logger) │
+        └────────┬─────────┘
+                 │
+                 ▼
+        ┌──────────────────┐
+        │     SQLite DB    │
+        │  dashboard.db    │
+        └──────────────────┘
+
+////////////////////////////////////////////////
+Request Lifecycle (What Happens Per Request)
+
+1. Client sends request (GET /health)
+2. Middleware starts timer
+3. Endpoint processes request
+4. Middleware stops timer
+5. Request data saved to database
+6. Response returned to client
+
+////////////////////////////////////////////////
+Database Model
+
+Table: api_requests
+
++-------------------+
+| id                |
+| timestamp         |
+| method            |
+| path              |
+| status_code       |
+| response_time_ms  |
++-------------------+
+Each row = one request that happened.
+
+
+////////////////////////////////////////////////
+Dashboard Data Flow
+
+User opens dashboard
+        ↓
+Frontend calls /metrics/summary
+        ↓
+FastAPI queries SQLite
+        ↓
+Aggregated data returned as JSON
+        ↓
+Frontend renders charts
+
+////////////////////////////////////////////////
+Mental Model (The Big Picture)
+
+Endpoints = doors
+
+Requests = people knocking
+
+Middleware = security camera
+
+Database = recording system
+
+Metrics endpoints = analytics team
+
+Frontend = news reporter
+
+Your system doesn’t just respond — it observes itself.
