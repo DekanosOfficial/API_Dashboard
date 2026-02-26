@@ -1,0 +1,60 @@
+API Health Tracker – File Responsibilities
+
+api-dashboard/
+│
+├── app/
+│   ├── __init__.py
+│   │    # Marks this folder as a Python package
+│
+│   ├── main.py
+│   │    # FastAPI app entry point
+│   │    # Defines API routes:
+│   │    #  - /apis → list APIs
+│   │    #  - /apis → register API
+│   │    #  - /apis/{id}/check → manual health check
+│   │    #  - /apis/{id}/history → health check history
+│   │    # Handles HTTP requests and dependencies
+│
+│   ├── database.py
+│   │    # Configures the database engine (SQLite)
+│   │    # Creates a session factory for DB connections
+│   │    # Calls Base.metadata.create_all() to create tables
+│
+│   ├── models.py
+│   │    # Defines database tables as Python classes
+│   │    # APIService → stores API info
+│   │    # HealthCheck → stores individual health check results
+│   │    # Sets relationships (one API → many HealthChecks)
+│
+│   ├── schemas.py  (future)
+│   │    # Optional: Pydantic models for data validation
+│   │    # Ensures requests/responses have correct structure
+│
+│   └── routes/
+│        ├── __init__.py
+│        │    # Marks routes folder as a package
+│        │
+│        └── items.py  (future)
+│             # Could store API-specific route logic
+│             # Allows splitting endpoints into separate files as project grows
+│
+├── requirements.txt
+│     # Lists project dependencies: fastapi, sqlalchemy, requests, uvicorn, etc.
+│
+├── README.md
+│     # Project documentation, usage instructions, and overview
+│
+└── .gitignore
+      # Files/folders Git should ignore (venv, __pycache__, etc.)
+
+-----------------------------------------------------------------------------------------------------------------
+
+How the Flow Works
+
+1. main.py receives the HTTP request.
+
+2. It calls get_db() from database.py to get a session.
+
+3. Queries or writes happen via models.py.
+
+4. Results are returned as JSON to the client.
