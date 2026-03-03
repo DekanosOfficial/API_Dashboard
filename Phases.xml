@@ -1,0 +1,67 @@
+Phase 1 — Solid Backend
+---------------------------------------------------------------
+API registration
+
+Health check storage
+
+Async checks
+
+Basic metrics
+
+Clean database structure
+
+
+
+Phase 2 — Real Metrics
+---------------------------------------------------------------
+Uptime %
+
+Rolling response time average
+
+Failure tracking
+
+Last 24h status graph
+
+
+
+Phase 3 — Frontend
+---------------------------------------------------------------
+Stack options:
+
+Option A:
+
+React
+
+Tailwind
+
+Chart library
+
+Fetch from FastAPI backend
+
+Option B:
+
+Next.js
+
+Same backend
+
+Option C:
+
+Simple HTML + JS first (lean build)
+
+
+
+Phase 4 — Deployment
+---------------------------------------------------------------
+You’ll need:
+
+Environment variables
+
+Production database
+
+Gunicorn + Uvicorn workers
+
+Docker (eventually)
+
+Hosting (Render, Railway, DigitalOcean, etc.)
+
+This becomes a portfolio weapon.
