@@ -44,5 +44,3 @@ class DailyAPISummary(Base):
     __table_args__ = (
         UniqueConstraint("date", "api_id", name="uq_date_apiid"),
     )
-
-

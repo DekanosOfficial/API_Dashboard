@@ -23,6 +23,8 @@ Failure tracking
 Last 24h status graph
 
 
+Now we’re entering “mini-Datadog” territory.
+
 
 Phase 3 — Frontend
 ---------------------------------------------------------------
@@ -47,6 +49,12 @@ Same backend
 Option C:
 
 Simple HTML + JS first (lean build)
+
+
+You don’t jump to React if your backend isn’t stable.
+
+Foundation first.
+
 
 
 
