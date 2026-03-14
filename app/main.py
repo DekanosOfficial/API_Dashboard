@@ -1,36 +1,29 @@
-from fastapi import FastAPI, Depends
-from sqlalchemy.orm import Session
-
-from .database import engine, SessionLocal, Base
-from .models import APIService, HealthCheck, DailyAPISummary
-
-
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+from .routes import apis, pages
+from .database import Base, engine
+from .utils import update_daily_summaries
+from apscheduler.schedulers.background import BackgroundScheduler
 
 #### Create tables
 Base.metadata.create_all(bind=engine)
 
 
 app = FastAPI(title="API Monitor v0")
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+scheduler = BackgroundScheduler()
+
+@app.on_event("startup")
+def start_scheduler():
+    # run every hour
+    scheduler.add_job(update_daily_summaries, 'interval', hours=2)
+    scheduler.start()
 
 
-#### Dependecncy get DB sessions
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-
-
-@app.get("/")
-def index():
-    return {"Hello World"}
-          
-
-@app.get("/health")
-def health():
-    return {"status": "ok"}
+# include the routers
+app.include_router(pages.router)
+app.include_router(apis.router)
 
 # @app.get("/system/health")
 # defid

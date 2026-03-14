@@ -1,0 +1,91 @@
+body {
+  font-family: Arial;
+  background-color: #0f0f0f;
+  color: white;
+  padding: 40px;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+.card {
+  background: #1c1c1c;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+.metric-cards {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.metric-card {
+  background: #1c1c1c;
+  padding: 1.5rem;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  text-align: center;
+  flex: 1 1 150px;
+}
+
+.chart-container {
+  height: 550px;
+  width: 1000px;
+  margin: auto;
+  background: #1c1c1c;
+  padding: 1.5rem;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  text-align: center;
+  flex: 1 1 150px;
+}
+
+
+.url {
+  color: #9ae6ff;
+}
+
+a {
+  color: #00ff9c;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+.measure {
+  color: #00ff9c;
+}
+
+h2 {
+  margin-bottom: 30px;
+}
+
+.status-light {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* Healthy */
+.status-light.healthy {
+  background: #00ff9c;
+  box-shadow: 0 0 8px #00ff9c;
+}
+
+/* Slight Problems */
+.status-light.degraded {
+  background: #ffc107;
+  box-shadow: 0 0 8px #ffc107;
+}
+
+/* Something broke */
+.status-light.failing {
+  background: #ff4d4d;
+  box-shadow: 0 0 8px #ff4d4d;
+}

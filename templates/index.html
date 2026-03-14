@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Monitor</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+  </head>
+  <body>
+    <h1>API Monitor Dashboard</h1>
+    <div id="api-container">
+      {% for api in apis %}
+
+      <div class="card">
+        <h1>{{ api.name }}</h1>
+        <p class="url">{{ api.base_url }}</p>
+        <p>
+          <a href="/apis/{{ api.id }}/metrics"> View Metrics </a>
+        </p>
+      </div>
+
+      {% endfor %}
+    </div>
+    <script src="/static/js/app.js"></script>
+  </body>
+</html>

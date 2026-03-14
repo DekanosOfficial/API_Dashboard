@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Monitor</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+  </head>
+  <body>
+    
+    <h1>API Metrics</h1>
+    <a class="backLink" href="/"> < Go Back </a>
+    <div id="api-container">
+      {% for api in apis %}
+      <h2>
+        <span class="status-light {{ api.status }}"></span> {{ api.name }}
+      </h2>
+      <div class="metric-cards">
+        <div class="metric-card">
+          <p class="measure">Uptime Percentage</p>
+          <div>
+            <h1>{{ api.uptime_percentage }}%</h1>
+            <p class="measure"></p>
+          </div>
+        </div>
+        <div class="metric-card">
+          <p class="measure">Average Response Time (ms)</p>
+          <h1>{{ api.avg_response_time }}</h1>
+        </div>
+        <div class="metric-card">
+          <p class="measure">Total Checks</p>
+          <h1>{{ api.total_checks }}</h1>
+        </div>
+        <div class="metric-card">
+          <p class="measure">Total Fails</p>
+          <h1>{{ api.total_failures }}</h1>
+        </div>
+        <div class="metric-card">
+          <p class="measure">Last Error</p>
+          {% if api.last_error %}
+          <h1>{{ api.last_error.status_code }}</h1>
+          <p class="measure">at {{ api.last_error.checked_at }}</p>
+          {% else %}
+          <h1>None</h1>
+          <p class="measure">All systems green</p>
+          {% endif %}
+        </div>
+      </div>
+      <div class="chart-container">
+        <p class="measure">Response Time</p>
+        <canvas
+          id="responseChart-{{ api.id }}"
+          class="api-metric-chart"
+          data-times='{{ api.response_times | tojson |safe }}'
+          data-labels='{{ api.timestamps | tojson | safe }}'
+        ></canvas>
+      </div>
+      {% endfor %}
+    </div>
+    <script src="/static/js/metrics.js"></script>
+  </body>
+</html>
